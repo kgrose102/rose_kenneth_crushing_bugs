@@ -2,9 +2,10 @@
 	// put variables (connections to the web page / DOM) at the topLeft
 	// const = constant -> something that will never change
 	// let = variable that can be changed
-	const puzzleSelectors = document.querySelectorAll("#buttonHolder img");
-				dropZoneContainer = document.querySelector(".puzzle-board");
-				dragImages = document.querySelectorAll(".puzzle-image");
+	const puzzleSelectors = document.querySelectorAll("#buttonHolder img"),
+				dropZoneContainer = document.querySelector(".puzzle-board"),
+				dragZone = document.querySelector(".puzzle-pieces"),
+				dragImages = document.querySelectorAll(".puzzle-image"),
 				dropZones = document.querySelectorAll(".drop-zone");
 
 	//functions go in the middle
@@ -31,7 +32,19 @@
 		event.target.appendChild(document.querySelector(`#${targetID}`));
 	}
 
+	// Changes the background image when bottom nav buttons are clicked
+	// will also be used as a reset to send the thumbnails into the drag zone
 	function changeBGImage() {
+		// check all the dop zones, if a drop zone has an image move it backGround
+		// apend it back into the drag zone.
+
+		dropZones.forEach(zone =>{
+			if (zone.childElementCount > 0){
+				dragZone.appendChild(zone.firstElementChild);
+			}
+		});
+
+
 		// get the custom data attribute from the clicked button
 		let currentImage = this.dataset.imageref;
 
