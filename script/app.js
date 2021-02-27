@@ -7,6 +7,8 @@
 				dragZone = document.querySelector(".puzzle-pieces"),
 				dragImages = document.querySelectorAll(".puzzle-image"),
 				dropZones = document.querySelectorAll(".drop-zone");
+				imgNumber = document.querySelectorAll("#buttonHolder img")
+				dragZoneImg = document.querySelectorAll(".puzzle-pieces img")
 
 	//functions go in the middle
 	function dragStart(event) {
@@ -44,7 +46,6 @@
 			}
 		});
 
-
 		// get the custom data attribute from the clicked button
 		let currentImage = this.dataset.imageref;
 
@@ -54,9 +55,24 @@
 		// can consolidate the 2 lines into 1 (let and dropZoneContainer)
 		// dropZoneContainer.style.backgroundImage = `url(images/backGround${this.dataset.imageref}.jpg)`;
 	}
+	function resetPuzzlePieces(){
+		// take the number of puzzle selector that was clicked and puts into variable
+		let bgImg = this.dataset.imageref
+		// console.log(bgImg)
+		// console.log(dragZoneImg)
+		// dragZoneImg.img.drag0 = `url(images/topLeft${bgImg}.jpg)`
+		// console.log(dragZoneImg[2])
+
+		// changes the of each puzzle piece to relate to the clicked puzzle
+		dragZoneImg[0].src=`images/topLeft${bgImg}.jpg`
+		dragZoneImg[1].src=`images/topRight${bgImg}.jpg`
+		dragZoneImg[2].src=`images/bottomLeft${bgImg}.jpg`
+		dragZoneImg[3].src=`images/bottomRight${bgImg}.jpg`
+	}
 
 	//event handling at the bottom
 	puzzleSelectors.forEach(button => button.addEventListener("click", changeBGImage));
+	puzzleSelectors.forEach(button => button.addEventListener("click", resetPuzzlePieces));
 
 	dragImages.forEach(piece => piece.addEventListener("dragstart", dragStart));
 
